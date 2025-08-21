@@ -1,0 +1,6 @@
+@Web.CustomerRegistration.Api.Cep_HostAddress = http://localhost:5153
+
+GET {{Web.CustomerRegistration.Api.Cep_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
