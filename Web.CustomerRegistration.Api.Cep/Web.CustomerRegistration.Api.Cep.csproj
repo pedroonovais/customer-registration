@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure.CustomerRegistration.Persistence\Infrastructure.CustomerRegistration.Persistence.csproj" />
+    <ProjectReference Include="..\Infrastructure.CustomerService.Integration\Infrastructure.CustomerRegistration.Integration.csproj" />
+    <ProjectReference Include="..\Shared.CustomerRegistration.Contracts\Shared.CustomerRegistration.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

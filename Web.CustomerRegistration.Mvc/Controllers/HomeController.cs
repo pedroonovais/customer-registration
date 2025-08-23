@@ -1,32 +1,24 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Web.CustomerRegistration.Mvc.Models;
+using Shared.CustomerRegistration.Contracts.Cep;
+using Shared.CustomerRegistration.Contracts.Customers;
 
-namespace Web.CustomerRegistration.Mvc.Controllers
+namespace Web.Store.Mvc.Controllers
 {
-    public class HomeController : Controller
+    public sealed class HomeController(IHttpClientFactory httpFactory) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public async Task<IActionResult> Index(CancellationToken ct)
         {
-            _logger = logger;
+            var http = httpFactory.CreateClient("CatalogApi");
+            var customers = await http.GetFromJsonAsync<List<CustomerDto>>("/api/customers", ct) ?? [];
+            return View(customers);
         }
 
-        public IActionResult Index()
+        [HttpPost]
+        public async Task<IActionResult> Cep(string cep, CancellationToken ct)
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var http = httpFactory.CreateClient("CepApi");
+            var res = await http.GetFromJsonAsync<CepResponse>($"/api/cep/{cep}", ct);
+            return View("Cep", res);
         }
     }
 }

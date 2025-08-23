@@ -1,0 +1,6 @@
+@Web.CustomerRegistration.Api.Catalog_HostAddress = http://localhost:5008
+
+GET {{Web.CustomerRegistration.Api.Catalog_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

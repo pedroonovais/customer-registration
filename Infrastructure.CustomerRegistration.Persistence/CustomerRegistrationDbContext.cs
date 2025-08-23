@@ -3,7 +3,7 @@ using System.Reflection.Emit;
 using Core.CustomerRegistration.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Store.Persistence
+namespace Infrastructure.CustomerRegistration.Persistence
 {
     public sealed class CustomerRegistrationDbContext(DbContextOptions<CustomerRegistrationDbContext> options) : DbContext(options)
     {

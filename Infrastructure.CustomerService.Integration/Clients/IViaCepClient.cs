@@ -1,6 +1,6 @@
 ﻿using Shared.CustomerRegistration.Contracts.Cep;
 
-namespace Infrastructure.Store.Integration.Clients
+namespace Infrastructure.CustomerRegistration.Integration.Clients
 {
     public interface IViaCepClient
     {

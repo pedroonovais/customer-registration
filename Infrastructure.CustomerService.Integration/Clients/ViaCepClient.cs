@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using Shared.CustomerRegistration.Contracts.Cep;
 using System.Net.Http.Json;
 
-namespace Infrastructure.Store.Integration.Clients
+namespace Infrastructure.CustomerRegistration.Integration.Clients
 {
     public sealed class ViaCepClient(HttpClient http, IOptions<ViaCepOptions> options) : IViaCepClient
     {

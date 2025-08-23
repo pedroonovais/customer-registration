@@ -1,0 +1,28 @@
+﻿@using Shared.CustomerRegistration.Contracts.Cep
+@model CepResponse
+@{
+    Layout = null;
+}
+<h2>Consulta de CEP</h2>
+
+@if (Model is null)
+{
+    <p>CEP não encontrado.</p>
+}
+else
+{
+    <dl>
+        <dt>CEP</dt>
+        <dd>@Model.Cep</dd>
+        <dt>Logradouro</dt>
+        <dd>@Model.Logradouro</dd>
+        <dt>Bairro</dt>
+        <dd>@Model.Bairro</dd>
+        <dt>Cidade</dt>
+        <dd>@Model.Localidade</dd>
+        <dt>UF</dt>
+        <dd>@Model.Uf</dd>
+    </dl>
+}
+
+<a asp-action="Index">Voltar</a>

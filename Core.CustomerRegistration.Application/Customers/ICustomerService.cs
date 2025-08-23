@@ -7,7 +7,7 @@ using Shared.CustomerRegistration.Contracts.Customers;
 
 namespace Core.CustomerRegistration.Application.Customers
 {
-    internal interface ICustomerService
+    public interface ICustomerService
     {
         Task<IReadOnlyList<CustomerDto>> GetAllAsync(CancellationToken ct = default);
         Task<CustomerDto?> GetByIdAsync(Guid id, CancellationToken ct = default);

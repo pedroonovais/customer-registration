@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.CustomerRegistration.Mvc", "Web.CustomerRegistration.Mvc\Web.CustomerRegistration.Mvc.csproj", "{5A8001F2-4737-4477-9F59-AE338A3F5F2E}"
 EndProject
@@ -19,9 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.CustomerRegistration
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2F67840B-DA47-479F-98E7-C17FA892E4F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.CustomerService.Integration", "Infrastructure.CustomerService.Integration\Infrastructure.CustomerService.Integration.csproj", "{F17D9B6B-F18C-43D8-A336-70366DB342A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.CustomerRegistration.Integration", "Infrastructure.CustomerService.Integration\Infrastructure.CustomerRegistration.Integration.csproj", "{F17D9B6B-F18C-43D8-A336-70366DB342A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.CustomerRegistration.Persistence", "Infrastructure.CustomerRegistration.Persistence\Infrastructure.CustomerRegistration.Persistence.csproj", "{3F2B935C-5D4A-442D-87EC-096AB741D5B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.CustomerRegistration.Api.Cep", "Web.CustomerRegistration.Api.Cep\Web.CustomerRegistration.Api.Cep.csproj", "{64D7C568-C5FD-45A7-86E5-49B6B57FE041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.CustomerRegistration.Api.Catalog", "Web.CustomerRegistration.Api.Catalog\Web.CustomerRegistration.Api.Catalog.csproj", "{BB75AEE1-2EE9-4071-89FC-F349EE384ACC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,14 @@ Global
 		{3F2B935C-5D4A-442D-87EC-096AB741D5B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F2B935C-5D4A-442D-87EC-096AB741D5B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F2B935C-5D4A-442D-87EC-096AB741D5B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64D7C568-C5FD-45A7-86E5-49B6B57FE041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64D7C568-C5FD-45A7-86E5-49B6B57FE041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64D7C568-C5FD-45A7-86E5-49B6B57FE041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64D7C568-C5FD-45A7-86E5-49B6B57FE041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB75AEE1-2EE9-4071-89FC-F349EE384ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB75AEE1-2EE9-4071-89FC-F349EE384ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB75AEE1-2EE9-4071-89FC-F349EE384ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB75AEE1-2EE9-4071-89FC-F349EE384ACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +76,7 @@ Global
 		{A4115586-D75C-444E-9972-0DB5B15773AD} = {C9BCEE19-3AD0-4F13-9578-EE558EA27DF1}
 		{F17D9B6B-F18C-43D8-A336-70366DB342A2} = {2F67840B-DA47-479F-98E7-C17FA892E4F6}
 		{3F2B935C-5D4A-442D-87EC-096AB741D5B8} = {2F67840B-DA47-479F-98E7-C17FA892E4F6}
+		{64D7C568-C5FD-45A7-86E5-49B6B57FE041} = {D11E290D-28F6-415D-A2B9-10FBB1A71C6C}
+		{BB75AEE1-2EE9-4071-89FC-F349EE384ACC} = {D11E290D-28F6-415D-A2B9-10FBB1A71C6C}
 	EndGlobalSection
 EndGlobal

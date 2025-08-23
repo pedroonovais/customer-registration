@@ -1,8 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Shared.CustomerRegistration.Contracts.Customers
+@model IEnumerable<CustomerDto>
+@{
+    Layout = null;
 }
+<h2>Customers</h2>
+<ul>
+    @foreach (var p in Model)
+    {
+        <li>@p.Name - @p.Email</li>
+    }
+</ul>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form method="post" asp-action="Cep">
+    <input name="cep" placeholder="Digite o CEP" />
+    <button type="submit">Consultar CEP</button>
+</form>

@@ -1,4 +1,4 @@
-﻿using Infrastructure.CustomerRegistration.Integration.Customers;
+﻿using Infrastructure.CustomerRegistration.Integration.Clients;
 using Microsoft.AspNetCore.Mvc;
 using Shared.CustomerRegistration.Contracts.Cep;
 
