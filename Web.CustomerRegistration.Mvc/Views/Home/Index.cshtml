@@ -1,52 +1,104 @@
 ﻿@model List<Shared.CustomerRegistration.Contracts.Customers.CustomerDto>
 @{
     ViewData["Title"] = "Clientes";
+    var count = Model?.Count ?? 0;
 }
 
-<div class="d-flex align-items-center justify-content-between mb-3">
-    <h1 class="mb-0">Clientes</h1>
-    <div class="d-flex gap-2">
-        <a asp-action="Cep" class="btn btn-outline-secondary">Consultar CEP</a>
-        <a asp-action="Create" class="btn btn-primary">Novo Cliente</a>
+<div class="flex items-center justify-between mb-6">
+    <div>
+        <h1 class="title">Clientes</h1>
+        <p class="text-sm text-gray-500">@count cliente@(count == 1 ? "" : "s") cadastrados</p>
+    </div>
+    <div class="flex gap-2">
+        <a asp-action="Cep" class="btn-secondary">Consultar CEP</a>
+        <a asp-action="Create" class="btn-primary">Novo Cliente</a>
     </div>
 </div>
 
 @if (TempData["Flash"] is string flash && !string.IsNullOrWhiteSpace(flash))
 {
-    <div class="alert alert-success" role="alert">@flash</div>
+    <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-700 ring-1 ring-green-200">@flash</div>
 }
 @if (TempData["Error"] is string err && !string.IsNullOrWhiteSpace(err))
 {
-    <div class="alert alert-danger" role="alert">@err</div>
+    <div class="mb-4 rounded-lg bg-red-50 p-4 text-red-700 ring-1 ring-red-200">@err</div>
 }
 
 @if (Model is { Count: > 0 })
 {
-    <div class="table-responsive">
-        <table class="table table-striped align-middle">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Profissão</th>
+    <div class="mb-4 flex items-center justify-between gap-3">
+        <div class="relative w-full max-w-sm">
+            <svg class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 1 1 1.414-1.414l3.387 3.387a1 1 0 0 1-1.414 1.414l-3.387-3.387ZM14 8a6 6 0 1 1-12 0 6 6 0 0 1 12 0Z" clip-rule="evenodd" />
+            </svg>
+            <input id="q" type="text" placeholder="Buscar por nome ou e-mail..."
+                   class="w-full rounded-lg border-gray-300 pl-10 pr-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+        </div>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table id="tbl" class="min-w-full text-sm">
+            <thead class="bg-gray-50">
+                <tr class="text-left text-gray-600">
+                    <th class="py-2 pr-4">Id</th>
+                    <th class="py-2 pr-4">Nome</th>
+                    <th class="py-2 pr-4">Email</th>
+                    <th class="py-2 pr-4">Profissão</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-gray-100">
                 @foreach (var c in Model)
                 {
-                    <tr>
-                        <td>@c.Id</td>
-                        <td>@c.Name</td>
-                        <td>@c.Email</td>
-                        <td>@c.Occupation</td>
+                    <tr class="hover:bg-gray-50"
+                        data-search="@($"{c.Id} {c.Name} {c.Email} {c.Occupation}").ToLowerInvariant()">
+                        <td class="py-2 pr-4 font-mono text-xs text-gray-500 break-all">@c.Id</td>
+                        <td class="py-2 pr-4 font-medium">@c.Name</td>
+                        <td class="py-2 pr-4">@c.Email</td>
+                        <td class="py-2 pr-4">@c.Occupation</td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
+
+    <div id="noResults" class="hidden mt-6 text-center text-gray-500">
+        Nenhum resultado para a busca.
+    </div>
 }
 else
 {
-    <div class="text-muted">Nenhum cliente cadastrado ainda.</div>
+    <div class="py-14 text-center">
+        <div class="mx-auto mb-3 h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center">
+            <svg class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10m-9 4h6M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" />
+            </svg>
+        </div>
+        <p class="text-gray-600 mb-4">Nenhum cliente cadastrado ainda.</p>
+        <a asp-action="Create" class="btn-primary">Cadastrar primeiro cliente</a>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        (function () {
+            const q = document.getElementById('q');
+            const rows = () => Array.from(document.querySelectorAll('#tbl tbody tr'));
+            const noRes = document.getElementById('noResults');
+
+            function applyFilter(term) {
+                if (!q) return;
+                const t = (term || '').toLowerCase();
+                let visible = 0;
+                rows().forEach(tr => {
+                    const hit = (tr.dataset.search || '').includes(t);
+                    tr.classList.toggle('hidden', !hit);
+                    if (hit) visible++;
+                });
+                if (noRes) noRes.classList.toggle('hidden', visible !== 0);
+            }
+
+            q?.addEventListener('input', (e) => applyFilter(e.target.value));
+        })();
+    </script>
 }

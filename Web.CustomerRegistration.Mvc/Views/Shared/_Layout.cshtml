@@ -1,0 +1,54 @@
+﻿@*
+  Views/Shared/_Layout.cshtml
+  Layout base com Tailwind CDN + plugin forms e alguns componentes utilitários.
+*@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - CustomerRegistration</title>
+
+    <!-- Tailwind CDN + plugin forms -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+    <!-- Configuração opcional do tema (cores, etc.) -->
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: { DEFAULT: '#4f46e5' } // indigo-600
+            }
+          }
+        }
+      }
+    </script>
+
+
+    @RenderSection("Head", required: false)
+</head>
+<body class="min-h-screen">
+    <!-- Topbar / Navbar -->
+    <header class="bg-white border-b">
+        <div class="container-app py-4 flex items-center justify-between">
+            <a asp-controller="Home" asp-action="Index" class="text-lg font-semibold">CustomerRegistration</a>
+            <nav class="flex items-center gap-2">
+                <a asp-controller="Home" asp-action="Index" class="btn-secondary">Clientes</a>
+                <a asp-controller="Home" asp-action="Cep" class="btn-secondary">Consultar CEP</a>
+                <a asp-controller="Home" asp-action="Create" class="btn-primary">Novo Cliente</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo -->
+    <main class="container-app py-8">
+        <div class="card">
+            @RenderBody()
+        </div>
+    </main>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
