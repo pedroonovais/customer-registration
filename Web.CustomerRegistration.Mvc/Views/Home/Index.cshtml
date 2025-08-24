@@ -5,14 +5,16 @@
 
 <div class="d-flex align-items-center justify-content-between mb-3">
     <h1 class="mb-0">Clientes</h1>
-    <a href="@Url.Action("Create","Home")" class="btn btn-primary">Novo Cliente</a>
+    <div class="d-flex gap-2">
+        <a asp-action="Cep" class="btn btn-outline-secondary">Consultar CEP</a>
+        <a asp-action="Create" class="btn btn-primary">Novo Cliente</a>
+    </div>
 </div>
 
 @if (TempData["Flash"] is string flash && !string.IsNullOrWhiteSpace(flash))
 {
     <div class="alert alert-success" role="alert">@flash</div>
 }
-
 @if (TempData["Error"] is string err && !string.IsNullOrWhiteSpace(err))
 {
     <div class="alert alert-danger" role="alert">@err</div>
