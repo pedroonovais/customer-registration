@@ -1,0 +1,44 @@
+﻿@model Web.CustomerRegistration.Mvc.Models.CreateCustomerViewModel
+@{
+    ViewData["Title"] = "Novo Cliente";
+}
+
+<h1 class="mb-3">Novo Cliente</h1>
+
+@if (TempData["Error"] is string apiErr && !string.IsNullOrWhiteSpace(apiErr))
+{
+    <div class="alert alert-danger" role="alert">@apiErr</div>
+}
+
+<form asp-controller="Home" asp-action="Create" method="post" class="row g-3" novalidate>
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="col-12">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Occupation" class="form-label"></label>
+        <input asp-for="Occupation" class="form-control" />
+        <span asp-validation-for="Occupation" class="text-danger"></span>
+    </div>
+
+    <div class="col-12 mt-2">
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

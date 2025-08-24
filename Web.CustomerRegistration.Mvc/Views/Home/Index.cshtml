@@ -1,17 +1,50 @@
-﻿@using Shared.CustomerRegistration.Contracts.Customers
-@model IEnumerable<CustomerDto>
+﻿@model List<Shared.CustomerRegistration.Contracts.Customers.CustomerDto>
 @{
-    Layout = null;
+    ViewData["Title"] = "Clientes";
 }
-<h2>Customers</h2>
-<ul>
-    @foreach (var p in Model)
-    {
-        <li>@p.Name - @p.Email</li>
-    }
-</ul>
 
-<form method="post" asp-action="Cep">
-    <input name="cep" placeholder="Digite o CEP" />
-    <button type="submit">Consultar CEP</button>
-</form>
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="mb-0">Clientes</h1>
+    <a href="@Url.Action("Create","Home")" class="btn btn-primary">Novo Cliente</a>
+</div>
+
+@if (TempData["Flash"] is string flash && !string.IsNullOrWhiteSpace(flash))
+{
+    <div class="alert alert-success" role="alert">@flash</div>
+}
+
+@if (TempData["Error"] is string err && !string.IsNullOrWhiteSpace(err))
+{
+    <div class="alert alert-danger" role="alert">@err</div>
+}
+
+@if (Model is { Count: > 0 })
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Profissão</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.Id</td>
+                        <td>@c.Name</td>
+                        <td>@c.Email</td>
+                        <td>@c.Occupation</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="text-muted">Nenhum cliente cadastrado ainda.</div>
+}

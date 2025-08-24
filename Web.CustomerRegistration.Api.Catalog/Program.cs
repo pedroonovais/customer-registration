@@ -7,28 +7,28 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
-// Swagger
 builder.Services.AddSwaggerGen();
 
-// EF Core
 builder.Services.AddDbContext<CustomerRegistrationDbContext>(opt =>
     opt.UseOracle(builder.Configuration.GetConnectionString("Default")));
 
-// DI
 builder.Services.AddScoped<ICustomerRepository, EfCustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
-app.UseAuthorization();
-
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHttpsRedirection(); 
+}
+
+app.UseAuthorization();
 
 app.MapControllers();
 
