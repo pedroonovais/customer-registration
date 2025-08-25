@@ -156,6 +156,48 @@ customer-registration/
 
 ---
 
+## 🗺️ Diagrama de Arquitetura (Mermaid)
+
+```mermaid
+flowchart LR
+  subgraph MVC[Web.CustomerRegistration.Mvc]
+    UI[Views / Controllers]
+  end
+
+  subgraph APIS[APIs]
+    APICatalog[Web.CustomerRegistration.Api.Catalog]
+    APICep[Web.CustomerRegistration.Api.Cep]
+  end
+
+  subgraph Core[Core.CustomerRegistration.Application]
+    Service[ICustomerService / CustomerService]
+    RepoPort[(ICustomerRepository)]
+  end
+
+  subgraph Infra[Infrastructure.CustomerRegistration.Persistence]
+    RepoImpl[EfCustomerRepository]
+    DB[(Oracle DB)]
+  end
+
+  subgraph Integration[Infrastructure.CustomerService.Integration]
+    CepClient[ICepClient / ViaCepClient]
+    ViaCEP[(ViaCEP API)]
+  end
+
+  UI -->|HTTP| APICatalog
+  UI -->|HTTP| APICep
+
+  APICatalog -->|DI| Service
+  Service --> RepoPort
+  RepoPort -.implements .-> RepoImpl
+  RepoImpl --> DB
+
+  APICep --> CepClient
+  CepClient --> ViaCEP
+```
+
+---
+
 ## 🧪 Boas práticas
 - **Swagger** habilitado nas duas APIs (`/swagger`).
 - **Validações** e mensagens de erro claras (400/404/201 etc.).
